@@ -2,7 +2,7 @@ export const footer = document.querySelector(".pagefooter");
 
 footer.innerHTML = ` <div class="container">
 <div class="footer--label">
-  <img src="../img/logo.svg" alt="chomp logo" />
+  <img src="./img/logo.svg" alt="chomp logo" />
   <div class="">
     <p>
       Takeaway & Delivery template <br />
@@ -33,12 +33,12 @@ footer.innerHTML = ` <div class="container">
 </div>
 <div class="footer--social">
 <a href="#">
-  <img src="../img/icons/instagram_icon.svg" alt="" />
+  <img src="./img/icons/instagram_icon.svg" alt="" />
 </a>
 <a href="#">
-  <img src="../img/icons/twitter_icon.svg" alt="" />
+  <img src="./img/icons/twitter_icon.svg" alt="" />
 </a>
 <a href="#">
-  <img src="../img/icons/youtube_icon.svg" alt="" />
+  <img src="./img/icons/youtube_icon.svg" alt="" />
 </a>
 </div>`;

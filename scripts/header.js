@@ -10,7 +10,7 @@ header.innerHTML = `
     
         <nav class="navbar">
         <a href="index.html" class="nav-brand">
-          <img src="../img/logo.svg" alt="logo" class="nav-logo" />
+          <img src="./img/logo.svg" alt="logo" class="nav-logo" />
         </a>
         <ul class="nav-menu">
           <li class="nav-item">
