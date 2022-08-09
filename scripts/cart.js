@@ -1,6 +1,7 @@
 import { localmenu } from "./products.js";
 //initializing variables
 const loader = document.querySelector(".loader");
+const title = document.querySelector("title").textContent;
 
 const cartBody = document.querySelector(".cart--body");
 const cart = document.querySelector(".cart");
