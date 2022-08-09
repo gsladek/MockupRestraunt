@@ -65,12 +65,10 @@ const addToCart = async (id) => {
     if (index >= 0) {
       const newQty = parseInt(localCart[index].qty) + parseInt(qty);
       localCart[index].qty = newQty;
-      console.log(item.name + " " + "exists!");
       postCart(cartOpen);
       //Edit item in Database
       editData(id, newQty);
     } else {
-      console.log(item.name + " " + "does not exists.");
       item.qty = qty;
       localCart.push(item);
       postCart(cartOpen);
@@ -96,7 +94,7 @@ const addToCart = async (id) => {
 };
 
 //removing Item from cart
-const deleteItem = (id, e) => {
+const deleteItem = (id) => {
   localCart.map((item) => {
     if (item.id === id) {
       console.log(item.name + " " + "removed");
@@ -105,7 +103,7 @@ const deleteItem = (id, e) => {
           const amount = localCart[i].price * localCart[i].qty;
           totalAmount = Math.round((totalAmount - amount) * 1e2) / 1e2;
           localCart.splice(i, 1);
-          cartBody.innerHTML = "";
+          checkout.innerHTML = "";
           checkoutTotal.innerHTML = "$" + totalAmount.toFixed(2);
           postCart();
         }
@@ -168,9 +166,14 @@ const postCart = (cartOpen) => {
         let removeBtns = document.querySelectorAll(".subtract");
         const currentQty = document.querySelectorAll(".currentQty");
         const Allprices = document.querySelectorAll(".item--price");
+
+        //DELETE BUTTON
         checkoutBtns[i].addEventListener("click", () => {
           deleteData(localCart[i].id);
+          deleteItem(localCart[i].id);
         });
+
+        //ADJUSTING QUANTITY
         addBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
           let price = Allprices[i].innerHTML.replace(/\$/g, "");
