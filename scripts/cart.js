@@ -184,6 +184,7 @@ const postCart = (cartOpen) => {
         });
         removeBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) - 1);
+          currentQty[i].innerText = parseInt(currentQty[i].innerText) - 1;
         });
       }
     }, 500);
