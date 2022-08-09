@@ -132,7 +132,7 @@ const postCart = (cartOpen) => {
     let img = getLastItem(localCart[i].img);
     cartHtml += `
   <div class = "cart--item">
-    <img src="../img/products/${img}"/>
+    <img src="./img/products/${img}"/>
     <div>
         <div class = "cart--item_header">
         <h5>${localCart[i].name}</h5>
