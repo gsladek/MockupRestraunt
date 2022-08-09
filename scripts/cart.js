@@ -153,7 +153,9 @@ const postCart = (cartOpen) => {
             }</p><button class = "subtract">-</button>
         </div>
         <div class = "checkout--item_total">
-        <p>$${(localCart[i].price * localCart[i].qty).toFixed(2)}</p>
+        <p class = "item--price">$${(
+          localCart[i].price * localCart[i].qty
+        ).toFixed(2)}</p>
     </div>
       </div>
     `;
@@ -161,23 +163,33 @@ const postCart = (cartOpen) => {
     setTimeout(() => {
       if (checkout != null) {
         let checkoutBtns = document.querySelectorAll(".checkout--item_delete");
+        let total = parseInt(checkoutTotal.innerHTML.replace(/\$/g, ""));
         let addBtns = document.querySelectorAll(".add");
         let removeBtns = document.querySelectorAll(".subtract");
         const currentQty = document.querySelectorAll(".currentQty");
-        const Allprices = document.querySelectorAll(".checkout--item_total");
-        let price = Allprices[i].innerText;
+        const Allprices = document.querySelectorAll(".item--price");
         checkoutBtns[i].addEventListener("click", () => {
           deleteData(localCart[i].id);
         });
         addBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
+          let price = Allprices[i].innerHTML.replace(/\$/g, "");
           const newQty = parseInt(currentQty[i].innerText) + 1;
           currentQty[i].innerText = newQty;
-          price = parseInt(price) + newQty * (parseInt(price) / newQty);
+          total += localCart[i].price;
+          Allprices[i].innerHTML =
+            "$" + (parseInt(price) + localCart[i].price).toFixed(2);
+          checkoutTotal.innerHTML = "$" + total.toFixed(2);
         });
         removeBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) - 1);
-          currentQty[i].innerText = parseInt(currentQty[i].innerText) - 1;
+          let price = Allprices[i].innerHTML.replace(/\$/g, "");
+          const newQty = parseInt(currentQty[i].innerText) - 1;
+          currentQty[i].innerText = newQty;
+          total -= localCart[i].price;
+          Allprices[i].innerHTML =
+            "$" + (parseInt(price) - localCart[i].price).toFixed(2);
+          checkoutTotal.innerHTML = "$" + total.toFixed(2);
         });
       }
     }, 500);
