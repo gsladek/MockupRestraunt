@@ -165,7 +165,7 @@ const postCart = (cartOpen) => {
         let removeBtns = document.querySelectorAll(".subtract");
         const currentQty = document.querySelectorAll(".currentQty");
         const Allprices = document.querySelectorAll(".checkout--item_total");
-        const price = Allprices[i].innerText;
+        let price = Allprices[i].innerText;
         checkoutBtns[i].addEventListener("click", () => {
           deleteData(localCart[i].id);
         });
@@ -173,7 +173,7 @@ const postCart = (cartOpen) => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
           const newQty = parseInt(currentQty[i].innerText) + 1;
           currentQty[i].innerText = newQty;
-          price += newQty * (price / newQty);
+          price += newQty * (parseInt(price) / newQty);
         });
         removeBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) - 1);
