@@ -1,7 +1,5 @@
 import { localmenu } from "./products.js";
 //initializing variables
-const loader = document.querySelector(".loader");
-
 const cartBody = document.querySelector(".cart--body");
 const cart = document.querySelector(".cart");
 const localCart = [];
@@ -38,7 +36,7 @@ const loadCart = async () => {
         currentAmount += parseInt(localCart[item].qty);
         badge.style.display = "flex";
         badge.innerHTML = currentAmount;
-      }
+      } else badge.style.display = "none";
     } else badge.style.display = "none";
   }
   postCart();
@@ -119,7 +117,6 @@ const deleteItem = (id, e) => {
           localCart.splice(i, 1);
           cartBody.innerHTML = "";
           checkoutTotal.innerHTML = "$" + totalAmount.toFixed(2);
-          loader.classList.add("active");
           postCart();
         }
       }
