@@ -158,7 +158,7 @@ const postCart = (cartOpen) => {
             </div>
         </div>
         <div class = "checkout--qty">
-            <button class = "add">+</button><p> ${
+            <button class = "add">+</button><p class = "currentQty"> ${
               localCart[i].qty
             }</p><button class = "subtract">-</button>
         </div>
@@ -179,6 +179,8 @@ const postCart = (cartOpen) => {
         });
         addBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
+          let allQty = document.querySelectorAll(".currentQty").children;
+          allQty[i].innerText = parseInt(allQty[i].innerText) + 1;
         });
         removeBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) - 1);
