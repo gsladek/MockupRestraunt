@@ -179,8 +179,8 @@ const postCart = (cartOpen) => {
         });
         addBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
-          let allQty = document.querySelectorAll(".currentQty").children;
-          allQty[i].innerText = parseInt(allQty[i].innerText) + 1;
+          let currentQty = document.querySelectorAll(".currentQty");
+          currentQty[i].innerText = parseInt(currentQty[i].innerText) + 1;
         });
         removeBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) - 1);
