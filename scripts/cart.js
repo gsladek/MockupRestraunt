@@ -173,13 +173,13 @@ const postCart = (cartOpen) => {
         let checkoutBtns = document.querySelectorAll(".checkout--item_delete");
         let addBtns = document.querySelectorAll(".add");
         let removeBtns = document.querySelectorAll(".subtract");
-
+        const currentQty = document.querySelectorAll(".currentQty");
         checkoutBtns[i].addEventListener("click", () => {
           deleteData(localCart[i].id);
         });
+
         addBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
-          let currentQty = document.querySelectorAll(".currentQty");
           currentQty[i].innerText = parseInt(currentQty[i].innerText) + 1;
         });
         removeBtns[i].addEventListener("click", () => {
