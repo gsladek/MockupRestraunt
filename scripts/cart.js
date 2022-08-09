@@ -148,7 +148,7 @@ const postCart = (cartOpen) => {
     checkoutHtml += `
     <div class = "checkout--item">
         <div class = "checkout--item_body">
-            <img src="../img/products/${img}"/>
+            <img src="./img/products/${img}"/>
             <div class = "checkout--item_header">
                 <h5>${localCart[i].name}</h5>
            
