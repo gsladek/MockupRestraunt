@@ -101,6 +101,10 @@ hamburger.addEventListener("click", () => {
   overlay.classList.toggle("active");
 });
 
+if (title === "Cart") {
+  document.querySelector(".btn--cart").style.display = "none";
+}
+
 // ------------------------ Navigation Link Toggle------------------------
 window.onload = function () {
   const navLinks = header.getElementsByTagName("a");
