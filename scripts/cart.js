@@ -173,7 +173,7 @@ const postCart = (cartOpen) => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
           const newQty = parseInt(currentQty[i].innerText) + 1;
           currentQty[i].innerText = newQty;
-          price += newQty * (parseInt(price) / newQty);
+          price = parseInt(price) + newQty * (parseInt(price) / newQty);
         });
         removeBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) - 1);
