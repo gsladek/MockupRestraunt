@@ -93,7 +93,7 @@ const hamburger = document.querySelector(".hamburger-nav");
 const mobileMenu = document.querySelector(".menu-mobile");
 const navBar = document.querySelector(".navbar");
 const overlay = document.querySelector(".menu--overlay");
-const PageTitle = document.querySelector("title").textContent;
+const title = document.querySelector("title").textContent;
 
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("active");
@@ -102,7 +102,7 @@ hamburger.addEventListener("click", () => {
   overlay.classList.toggle("active");
 });
 
-if (PageTitle === "Cart") {
+if (title === "Cart") {
   document.querySelector(".btn--cart").style.display = "none";
 }
 
@@ -117,5 +117,3 @@ window.onload = function () {
     }
   }
 };
-
-const title = document.querySelector("title").textContent;

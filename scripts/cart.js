@@ -9,6 +9,7 @@ const badge = document.querySelector(".badge");
 
 const checkout = document.querySelector(".checkout--body");
 const checkoutTotal = document.querySelector(".checkout--total");
+const title = document.querySelector("title").textContent;
 
 let totalAmount = 0;
 let cartOpen = true;
@@ -31,11 +32,13 @@ const loadCart = async () => {
     if (checkout != null) {
       checkoutTotal.innerHTML = "$" + totalAmount.toFixed(2);
     }
-
+    //adding badge wuth qty
     if (localCart.length > 0) {
-      currentAmount += parseInt(data[item].qty);
-      badge.style.display = "flex";
-      badge.innerHTML = currentAmount;
+      if (title !== "Cart") {
+        currentAmount += parseInt(localCart[item].qty);
+        badge.style.display = "flex";
+        badge.innerHTML = currentAmount;
+      }
     } else badge.style.display = "none";
   }
   postCart();
