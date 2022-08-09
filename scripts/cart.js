@@ -164,12 +164,16 @@ const postCart = (cartOpen) => {
         let addBtns = document.querySelectorAll(".add");
         let removeBtns = document.querySelectorAll(".subtract");
         const currentQty = document.querySelectorAll(".currentQty");
+        const Allprices = document.querySelectorAll(".checkout--item_total");
+        const price = Allprices[i].innerText;
         checkoutBtns[i].addEventListener("click", () => {
           deleteData(localCart[i].id);
         });
         addBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
-          currentQty[i].innerText = parseInt(currentQty[i].innerText) + 1;
+          const newQty = parseInt(currentQty[i].innerText) + 1;
+          currentQty[i].innerText = newQty;
+          price += newQty * (price / newQty);
         });
         removeBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) - 1);
@@ -207,6 +211,7 @@ const postCart = (cartOpen) => {
 const editData = async (id, qty) => {
   if (qty <= 0) {
     deleteData(id);
+    deleteItem(id);
   } else {
     await fetch(`http://localhost:3000/cart/${id}`, {
       method: "PATCH",
@@ -227,6 +232,7 @@ const postData = async (data) => {
     },
     body: JSON.stringify(data),
   });
+  postCart();
 };
 
 //remove from database
@@ -234,7 +240,6 @@ const deleteData = async (id) => {
   await fetch(`http://localhost:3000/cart/${id}`, {
     method: "Delete",
   });
-  deleteItem(id);
 };
 //#endregion --- database functions
 
