@@ -93,6 +93,7 @@ const hamburger = document.querySelector(".hamburger-nav");
 const mobileMenu = document.querySelector(".menu-mobile");
 const navBar = document.querySelector(".navbar");
 const overlay = document.querySelector(".menu--overlay");
+const PageTitle = document.querySelector("title").textContent;
 
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("active");
@@ -101,7 +102,7 @@ hamburger.addEventListener("click", () => {
   overlay.classList.toggle("active");
 });
 
-if (title === "Cart") {
+if (PageTitle === "Cart") {
   document.querySelector(".btn--cart").style.display = "none";
 }
 
