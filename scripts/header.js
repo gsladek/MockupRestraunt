@@ -1,3 +1,4 @@
+import { localCart } from "./cart.js";
 export const header = document.querySelector(".pageheader");
 
 header.innerHTML = `
@@ -94,6 +95,7 @@ const mobileMenu = document.querySelector(".menu-mobile");
 const navBar = document.querySelector(".navbar");
 const overlay = document.querySelector(".menu--overlay");
 const title = document.querySelector("title").textContent;
+const badge = document.querySelector(".badge");
 
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("active");
@@ -102,10 +104,26 @@ hamburger.addEventListener("click", () => {
   overlay.classList.toggle("active");
 });
 
+//adding badge wuth qty
+setTimeout(() => {
+  if (localCart.length > 0) {
+    let currentAmount = 0;
+
+    for (let i = 0; i < localCart.length; i++) {
+      currentAmount += parseInt(localCart[i].qty);
+    }
+    if (title !== "Cart") {
+      badge.style.display = "flex";
+      badge.innerHTML = currentAmount;
+    }
+  } else badge.style.display = "none";
+}, 500);
+
+//hiding cart on checkout page
 if (title === "Cart") {
   document.querySelector(".btn--cart").style.display = "none";
+  badge.style.display = "none";
 }
-
 // ------------------------ Navigation Link Toggle------------------------
 window.onload = function () {
   const navLinks = header.getElementsByTagName("a");

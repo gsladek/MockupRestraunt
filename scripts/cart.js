@@ -3,7 +3,6 @@ import { localmenu } from "./products.js";
 const cartBody = document.querySelector(".cart--body");
 const cart = document.querySelector(".cart");
 const localCart = [];
-const badge = document.querySelector(".badge");
 
 const checkout = document.querySelector(".checkout--body");
 const checkoutTotal = document.querySelector(".checkout--total");
@@ -21,7 +20,6 @@ const loadCart = async () => {
   let url = "http://localhost:3000/cart";
   const res = await fetch(url);
   const data = await res.json();
-  let currentAmount = 0;
   for (let item = 0; item < data.length; item++) {
     localCart.push(data[item]);
     const amount = data[item].price * data[item].qty;
@@ -30,14 +28,6 @@ const loadCart = async () => {
     if (checkout != null) {
       checkoutTotal.innerHTML = "$" + totalAmount.toFixed(2);
     }
-    //adding badge wuth qty
-    if (localCart.length > 0) {
-      if (title !== "Cart") {
-        currentAmount += parseInt(localCart[item].qty);
-        badge.style.display = "flex";
-        badge.innerHTML = currentAmount;
-      } else badge.style.display = "none";
-    } else badge.style.display = "none";
   }
   postCart();
 };
@@ -200,8 +190,10 @@ const postCart = (cartOpen) => {
       }, 1000);
     }
   }
+  if (cart !== null) {
+    cartBody.innerHTML = cartHtml;
+  }
 
-  cartBody.innerHTML = cartHtml;
   if (checkout !== null) {
     checkout.innerHTML = checkoutHtml;
   }
@@ -245,4 +237,4 @@ const deleteData = async (id) => {
 };
 //#endregion --- database functions
 
-export { cart, loadCart, addToCart, deleteItem };
+export { cart, loadCart, addToCart, deleteItem, localCart };
