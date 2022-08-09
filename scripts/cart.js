@@ -177,17 +177,18 @@ const postCart = (cartOpen) => {
         });
       }
     }, 500);
-
-    if (cartOpen) {
-      //showing the cart
-      cart.classList.add("active");
-      setTimeout(() => {
-        cart.classList.add("closing");
+    if (cart !== null) {
+      if (cartOpen) {
+        //showing the cart
+        cart.classList.add("active");
         setTimeout(() => {
-          cart.classList.remove("active");
-          cart.classList.remove("closing");
-        }, 500);
-      }, 1000);
+          cart.classList.add("closing");
+          setTimeout(() => {
+            cart.classList.remove("active");
+            cart.classList.remove("closing");
+          }, 500);
+        }, 1000);
+      }
     }
   }
   if (cart !== null) {
