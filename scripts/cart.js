@@ -177,7 +177,6 @@ const postCart = (cartOpen) => {
         checkoutBtns[i].addEventListener("click", () => {
           deleteData(localCart[i].id);
         });
-
         addBtns[i].addEventListener("click", () => {
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
           currentQty[i].innerText = parseInt(currentQty[i].innerText) + 1;
