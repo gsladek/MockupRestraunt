@@ -241,7 +241,7 @@ const postCart = (cartOpen) => {
 
 //post to database
 const editData = async (id, qty) => {
-  if (qty <= 0) {
+  if (qty === 0) {
     deleteData(id);
     deleteItem(id);
   } else {
