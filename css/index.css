@@ -7335,13 +7335,14 @@ img#google-logo {
   justify-content: center;
   margin: 20px 0;
 }
-@media (min-width: 480px) {
+@media (min-width: 650px) {
   .checkout .checkout--body .checkout--item {
     display: flex;
   }
 }
 .checkout .checkout--body .checkout--item img {
-  width: 200px;
+  width: 300px;
+  height: 300px;
 }
 .checkout .checkout--body .checkout--item .checkout--item_body {
   text-align: center;
@@ -7417,7 +7418,7 @@ img#google-logo {
   width: fit-content;
   height: fit-content;
 }
-@media (min-width: 480px) {
+@media (min-width: 650px) {
   .checkout .checkout--footer div {
     position: absolute;
     right: 0;
