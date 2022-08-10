@@ -197,7 +197,7 @@ const postCart = (cartOpen) => {
           let price = Allprices[i].innerHTML.replace(/\$/g, "");
           const newQty = parseInt(currentQty[i].innerText) + 1;
           currentQty[i].innerText = newQty;
-          total += localCart[i].price;
+          total = total + localCart[i].price;
           let itemTotal = (localCart[i].price * newQty).toFixed(2);
           console.log(itemTotal);
           Allprices[i].innerHTML = "$" + itemTotal;
@@ -205,11 +205,10 @@ const postCart = (cartOpen) => {
         });
 
         removeBtns[i].addEventListener("click", () => {
-          let price = Allprices[i].innerHTML.replace(/\$/g, "");
           const newQty = parseInt(currentQty[i].innerText) - 1;
           editData(localCart[i].id, newQty);
           currentQty[i].innerText = newQty;
-          total -= localCart[i].price;
+          total = total - localCart[i].price;
           let itemTotal = (localCart[i].price * newQty).toFixed(2);
           console.log(itemTotal);
           Allprices[i].innerHTML = "$" + itemTotal;
