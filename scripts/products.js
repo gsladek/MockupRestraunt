@@ -71,13 +71,19 @@ const postMenu = (start, end) => {
   const next = document.querySelector("#next");
   if (page.length < filteredmenu.length) {
     const nextPage = () => {
+      const loader = document.querySelector(".loader");
+      menu.innerHTML = "";
       start = start + 6;
       end = start + 6;
       if (start > filteredmenu.length) {
         start = 0;
         end = 6;
       }
-      postMenu(start, end);
+      loader.classList.add("active");
+      setTimeout(function () {
+        postMenu(start, end);
+        loader.classList.remove("active");
+      }, 1000);
     };
     next.style.display = "block";
     next.addEventListener("click", () => {

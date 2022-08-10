@@ -7314,6 +7314,10 @@ img#google-logo {
   display: none;
 }
 
+#menu {
+  width: 100vw;
+}
+
 /*--------------------- Checkout PAGE ----------------------*/
 .checkout {
   display: block;
