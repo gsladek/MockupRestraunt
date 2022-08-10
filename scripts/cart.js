@@ -116,6 +116,7 @@ const deleteItem = (id) => {
 
 //post cart
 const postCart = (cartOpen) => {
+  const badge = document.querySelector(".badge");
   const cart = document.querySelector(".cart");
   const cartBody = document.querySelector(".cart--body");
   cartHtml = "";
@@ -221,6 +222,18 @@ const postCart = (cartOpen) => {
   if (checkout !== null) {
     checkout.innerHTML = checkoutHtml;
   }
+
+  if (localCart.length > 0) {
+    let currentAmount = 0;
+
+    for (let i = 0; i < localCart.length; i++) {
+      currentAmount += parseInt(localCart[i].qty);
+    }
+    if (title !== "Cart") {
+      badge.style.display = "flex";
+      badge.innerHTML = currentAmount;
+    }
+  } else badge.style.display = "none";
 };
 //#endregion -- cart
 
