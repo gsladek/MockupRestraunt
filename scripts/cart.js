@@ -96,13 +96,13 @@ const addToCart = async (id) => {
 };
 
 //removing Item from cart
-const deleteItem = (id) => {
+const deleteItem = (id, qty) => {
   localCart.map((item) => {
     if (item.id === id) {
       console.log(item.name + " " + "removed");
       for (let i = 0; i < localCart.length; i++) {
         if (localCart[i].id === item.id) {
-          const amount = localCart[i].price * localCart[i].qty;
+          const amount = localCart[i].price * qty;
           totalAmount = Math.round((totalAmount - amount) * 1e2) / 1e2;
           localCart.splice(i, 1);
           checkout.innerHTML = "";
@@ -187,14 +187,13 @@ const postCart = (cartOpen) => {
         //DELETE BUTTON
         checkoutBtns[i].addEventListener("click", () => {
           deleteData(localCart[i].id);
-          deleteItem(localCart[i].id);
+          console.log(localCart[i].qty);
+          deleteItem(localCart[i].id, localCart[i].qty);
         });
         //ADJUSTING QUANTITY
         addBtns[i].addEventListener("click", () => {
-          console.log(totalAmount);
-          editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
-          let price = Allprices[i].innerHTML.replace(/\$/g, "");
           const newQty = parseInt(currentQty[i].innerText) + 1;
+          editData(localCart[i], newQty);
           currentQty[i].innerText = newQty;
           let itemTotal = Math.round(localCart[i].price * newQty * 1e2) / 1e2;
           Allprices[i].innerHTML = "$" + itemTotal.toFixed(2);
@@ -208,7 +207,7 @@ const postCart = (cartOpen) => {
 
         removeBtns[i].addEventListener("click", () => {
           const newQty = parseInt(currentQty[i].innerText) - 1;
-          editData(localCart[i].id, newQty);
+          editData(localCart[i], newQty);
           currentQty[i].innerText = newQty;
           let itemTotal = Math.round(localCart[i].price * newQty * 1e2) / 1e2;
           Allprices[i].innerHTML = "$" + itemTotal.toFixed(2);
@@ -246,12 +245,13 @@ const postCart = (cartOpen) => {
 //#region ---------------- Database Functions --------------------
 
 //post to database
-const editData = async (id, qty) => {
+const editData = async (item, qty) => {
   if (qty === 0) {
-    deleteData(id);
-    deleteItem(id);
+    deleteData(item.id);
+    deleteItem(item.id);
   } else {
-    await fetch(`http://localhost:3000/cart/${id}`, {
+    item.qty = qty;
+    await fetch(`http://localhost:3000/cart/${item.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
