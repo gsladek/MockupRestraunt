@@ -1,7 +1,5 @@
 import { localmenu } from "./products.js";
 //initializing variables
-const cartBody = document.querySelector(".cart--body");
-const cart = document.querySelector(".cart");
 const localCart = [];
 
 const checkout = document.querySelector(".checkout--body");
@@ -67,22 +65,22 @@ const addToCart = async (id) => {
       localCart[index].qty = newQty;
       postCart(cartOpen);
       //Edit item in Database
-      editData(id, newQty);
+      //editData(id, newQty);
     } else {
       item.qty = qty;
       localCart.push(item);
       postCart(cartOpen);
 
       //add to database
-      postData(newItem);
+      //postData(newItem);
     }
   } else {
     //console.log(item.name + " " + "does not exists.");
     item.qty = qty;
     localCart.push(item);
-    postCart();
+    postCart(cartOpen);
     //add to database
-    postData(newItem);
+    //postData(newItem);
   }
   const amount = item.price * qty;
   totalAmount = Math.round((totalAmount + amount) * 1e2) / 1e2;
@@ -114,6 +112,8 @@ const deleteItem = (id) => {
 
 //post cart
 const postCart = (cartOpen) => {
+  const cart = document.querySelector(".cart");
+  const cartBody = document.querySelector(".cart--body");
   cartHtml = "";
   checkoutHtml = "";
   for (let i = 0; i < localCart.length; i++) {
@@ -158,7 +158,20 @@ const postCart = (cartOpen) => {
       </div>
     `;
     //adding event listeners
+
     setTimeout(() => {
+      if (cartOpen) {
+        //showing the cart
+        cart.classList.add("active");
+        setTimeout(() => {
+          cart.classList.add("closing");
+          setTimeout(() => {
+            cart.classList.remove("active");
+            cart.classList.remove("closing");
+          }, 500);
+        }, 1000);
+      }
+
       if (checkout != null) {
         let checkoutBtns = document.querySelectorAll(".checkout--item_delete");
         let total = parseInt(checkoutTotal.innerHTML.replace(/\$/g, ""));
@@ -196,19 +209,6 @@ const postCart = (cartOpen) => {
         });
       }
     }, 500);
-    if (cart !== null) {
-      if (cartOpen) {
-        //showing the cart
-        cart.classList.add("active");
-        setTimeout(() => {
-          cart.classList.add("closing");
-          setTimeout(() => {
-            cart.classList.remove("active");
-            cart.classList.remove("closing");
-          }, 500);
-        }, 1000);
-      }
-    }
   }
   if (cart !== null) {
     cartBody.innerHTML = cartHtml;
@@ -258,4 +258,4 @@ const deleteData = async (id) => {
 };
 //#endregion --- database functions
 
-export { cart, loadCart, addToCart, deleteItem, localCart };
+export { loadCart, addToCart, deleteItem, localCart };

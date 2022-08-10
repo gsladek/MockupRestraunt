@@ -1,8 +1,9 @@
-import { cart, loadCart, addToCart, deleteItem } from "./cart.js";
+import { loadCart, addToCart, deleteItem } from "./cart.js";
 
 const title = document.querySelector("title").textContent;
 const localmenu = [];
 const menu = document.querySelector("#menu");
+const cart = document.querySelector(".cart");
 
 let filteredmenu = [];
 let html = "";
@@ -57,8 +58,11 @@ const postMenu = (start, end) => {
     // Adding Event Listener to the buttons
     setTimeout(function () {
       let addBtns = document.querySelectorAll(".add-to-cart");
-      addBtns[item].addEventListener("click", (e) => {
-        e.preventDefault();
+      addBtns[item].addEventListener("click", () => {
+        if (cart != null) {
+          cart.classList.add("active");
+        }
+
         addToCart(page[item].id);
       });
     }, 500);
