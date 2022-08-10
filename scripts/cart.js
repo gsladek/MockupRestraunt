@@ -202,10 +202,11 @@ const postCart = (cartOpen) => {
             "$" + (parseInt(price) + localCart[i].price).toFixed(2);
           checkoutTotal.innerHTML = "$" + total.toFixed(2);
         });
+
         removeBtns[i].addEventListener("click", () => {
-          editData(localCart[i].id, parseInt(localCart[i].qty) - 1);
           let price = Allprices[i].innerHTML.replace(/\$/g, "");
           const newQty = parseInt(currentQty[i].innerText) - 1;
+          editData(localCart[i].id, newQty);
           currentQty[i].innerText = newQty;
           total -= localCart[i].price;
           Allprices[i].innerHTML =
@@ -241,6 +242,7 @@ const postCart = (cartOpen) => {
 
 //post to database
 const editData = async (id, qty) => {
+  console.log(qty);
   if (qty === 0) {
     deleteData(id);
     deleteItem(id);
