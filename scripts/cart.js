@@ -198,8 +198,9 @@ const postCart = (cartOpen) => {
           const newQty = parseInt(currentQty[i].innerText) + 1;
           currentQty[i].innerText = newQty;
           total += localCart[i].price;
-          Allprices[i].innerHTML =
-            "$" + (parseInt(price) + localCart[i].price).toFixed(2);
+          let itemTotal = (localCart[i].price * newQty).toFixed(2);
+          console.log(itemTotal);
+          Allprices[i].innerHTML = "$" + itemTotal;
           checkoutTotal.innerHTML = "$" + total.toFixed(2);
         });
 
@@ -209,8 +210,10 @@ const postCart = (cartOpen) => {
           editData(localCart[i].id, newQty);
           currentQty[i].innerText = newQty;
           total -= localCart[i].price;
-          Allprices[i].innerHTML =
-            "$" + (parseInt(price) - localCart[i].price).toFixed(2);
+          let itemTotal = (localCart[i].price * newQty).toFixed(2);
+          console.log(itemTotal);
+          Allprices[i].innerHTML = "$" + itemTotal;
+
           checkoutTotal.innerHTML = "$" + total.toFixed(2);
         });
       }
@@ -242,7 +245,6 @@ const postCart = (cartOpen) => {
 
 //post to database
 const editData = async (id, qty) => {
-  console.log(qty);
   if (qty === 0) {
     deleteData(id);
     deleteItem(id);
