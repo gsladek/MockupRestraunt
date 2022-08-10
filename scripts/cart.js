@@ -224,8 +224,20 @@ const postCart = (cartOpen) => {
     cartBody.innerHTML = cartHtml;
   }
 
+  //adding tooltip id cart is empty
+  const cartBtn = document.querySelector(".btn--cart");
+  if (localCart.length <= 0) {
+    cartBtn.href = "#";
+    cartBtn.classList.add("empty");
+  } else {
+    cartBtn.href = "./cart.html";
+    cartBtn.classList.remove("empty");
+  }
   if (checkout !== null) {
     checkout.innerHTML = checkoutHtml;
+    if (localCart.length <= 0) {
+      location.href = "./";
+    }
   }
 
   if (localCart.length > 0) {

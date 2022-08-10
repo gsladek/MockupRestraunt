@@ -33,7 +33,7 @@ header.innerHTML = `
         <div class="container--flex">
           <div class="nav-item">
           <div class = "badge"></div>
-            <a href="cart.html" class="btn--cart">
+            <a href="cart.html" class="btn--cart" data-tooltip = "Your cart is empty! Add somthing to continue">
               <svg
                 class="cart-icon"
                 width="17px"
