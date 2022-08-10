@@ -179,7 +179,6 @@ const postCart = (cartOpen) => {
 
       if (checkout != null) {
         let checkoutBtns = document.querySelectorAll(".checkout--item_delete");
-        let total = parseInt(checkoutTotal.innerHTML.replace(/\$/g, ""));
         let addBtns = document.querySelectorAll(".add");
         let removeBtns = document.querySelectorAll(".subtract");
         const currentQty = document.querySelectorAll(".currentQty");
@@ -190,30 +189,34 @@ const postCart = (cartOpen) => {
           deleteData(localCart[i].id);
           deleteItem(localCart[i].id);
         });
-
         //ADJUSTING QUANTITY
         addBtns[i].addEventListener("click", () => {
+          console.log(totalAmount);
           editData(localCart[i].id, parseInt(localCart[i].qty) + 1);
           let price = Allprices[i].innerHTML.replace(/\$/g, "");
           const newQty = parseInt(currentQty[i].innerText) + 1;
           currentQty[i].innerText = newQty;
-          total = total + localCart[i].price;
-          let itemTotal = (localCart[i].price * newQty).toFixed(2);
-          console.log(itemTotal);
-          Allprices[i].innerHTML = "$" + itemTotal;
-          checkoutTotal.innerHTML = "$" + total.toFixed(2);
+          let itemTotal = Math.round(localCart[i].price * newQty * 1e2) / 1e2;
+          Allprices[i].innerHTML = "$" + itemTotal.toFixed(2);
+
+          //updating cart total
+          totalAmount =
+            Math.round((totalAmount + parseFloat(itemTotal) / newQty) * 1e2) /
+            1e2;
+          checkoutTotal.innerHTML = "$" + totalAmount.toFixed(2);
         });
 
         removeBtns[i].addEventListener("click", () => {
           const newQty = parseInt(currentQty[i].innerText) - 1;
           editData(localCart[i].id, newQty);
           currentQty[i].innerText = newQty;
-          total = total - localCart[i].price;
-          let itemTotal = (localCart[i].price * newQty).toFixed(2);
-          console.log(itemTotal);
-          Allprices[i].innerHTML = "$" + itemTotal;
-
-          checkoutTotal.innerHTML = "$" + total.toFixed(2);
+          let itemTotal = Math.round(localCart[i].price * newQty * 1e2) / 1e2;
+          Allprices[i].innerHTML = "$" + itemTotal.toFixed(2);
+          //updateing cart total
+          totalAmount =
+            Math.round((totalAmount - parseFloat(itemTotal) / newQty) * 1e2) /
+            1e2;
+          checkoutTotal.innerHTML = "$" + totalAmount.toFixed(2);
         });
       }
     }, 500);
