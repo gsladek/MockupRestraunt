@@ -63,24 +63,28 @@ const addToCart = async (id) => {
     if (index >= 0) {
       const newQty = parseInt(localCart[index].qty) + parseInt(qty);
       localCart[index].qty = newQty;
-      postCart(cartOpen);
       //Edit item in Database
-      //editData(id, newQty);
+      editData(id, newQty);
+
+      //update the local data
+      postCart(cartOpen);
     } else {
       item.qty = qty;
       localCart.push(item);
-      postCart(cartOpen);
 
       //add to database
-      //postData(newItem);
+      postData(newItem);
+      //update the local data
+      postCart(cartOpen);
     }
   } else {
     //console.log(item.name + " " + "does not exists.");
     item.qty = qty;
     localCart.push(item);
-    postCart(cartOpen);
     //add to database
-    //postData(newItem);
+    postData(newItem);
+    //update the local data
+    postCart(cartOpen);
   }
   const amount = item.price * qty;
   totalAmount = Math.round((totalAmount + amount) * 1e2) / 1e2;
