@@ -4776,6 +4776,7 @@ footer .container {
 }
 footer .container .footer--label {
   display: block;
+  margin: auto;
 }
 footer .container .footer--label img {
   width: 40px;

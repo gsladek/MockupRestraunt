@@ -3,7 +3,7 @@ export const footer = document.querySelector(".pagefooter");
 footer.innerHTML = ` <div class="container">
 <div class="footer--label">
   <img src="./img/logo.svg" alt="chomp logo" />
-  <div class="">
+  <div>
     <p>
       Takeaway & Delivery template <br />
       for small-medium businesses.
