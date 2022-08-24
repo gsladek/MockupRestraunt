@@ -4762,6 +4762,7 @@ footer {
   background-size: contain;
   background-repeat: no-repeat;
   padding: 100px 3% 60px;
+  margin-top: 40px;
 }
 footer .container {
   justify-content: left;
@@ -4968,6 +4969,9 @@ footer .footer--social a:hover {
 }
 .container div {
   margin: auto;
+}
+.container .btn-group {
+  margin-top: 40px;
 }
 .container .btn {
   margin: auto;
