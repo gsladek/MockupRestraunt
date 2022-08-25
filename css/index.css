@@ -4647,6 +4647,19 @@ form textarea {
 .hamburger-nav.active .hamburger-bar {
   background-color: white;
 }
+.hamburger-nav.active :nth-child(1) {
+  display: none;
+}
+.hamburger-nav.active :nth-child(2) {
+  transform: rotate(45deg) scale(1.5);
+  transform-origin: left;
+  margin-top: -3px;
+}
+.hamburger-nav.active :nth-child(3) {
+  transform: rotate(-45deg) scale(1.5);
+  transform-origin: right;
+  margin-top: -6px;
+}
 
 /*------------------------ Cart -------------------------*/
 @keyframes fadeIn {
